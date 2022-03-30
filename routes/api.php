@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\FoodController;
 use App\Http\Controllers\API\UserContoller;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('user', [UserContoller::class,'updateProfile']);
     Route::post('user/photo', [UserController::class, 'updatePhoto']);
     Route::post('logout', [UserController::class, 'logout']);
+    Route::post('transaction', [Transaction::class, 'all']);
 });
 
 Route::post('login', [UserController::class, 'login']);
