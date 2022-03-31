@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\API\FoodController;
+use App\Http\Controllers\API\TransactionController;
 use App\Http\Controllers\API\UserContoller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Laravel\Jetstream\Rules\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,8 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('user/photo', [UserController::class, 'updatePhoto']);
     Route::post('logout', [UserController::class, 'logout']);
     Route::post('transaction', [Transaction::class, 'all']);
+    Route::post('transaction/{$id}', [TransactionController::class,'update']);
+    Route::post('checkout', [TransactionController::class, 'checkout']);
 });
 
 Route::post('login', [UserController::class, 'login']);
