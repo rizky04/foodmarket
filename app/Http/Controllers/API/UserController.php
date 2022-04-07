@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class UserContoller extends Controller
+class UserController extends Controller
 {
     use PasswordValidationRules;
     public function login(Request $request)
@@ -53,14 +53,14 @@ class UserContoller extends Controller
        }
     }
 
-    public function register(Request $request)
+    public function register (Request $request)
     {
         try {
-            $request->validate([
-                'name' => ['required','string','max:255'],
-                'email' => ['required','string','email','unique:users'],
-                'password' => $this->passwordRules()
-            ]);
+            // $this->validate($request,[
+            //     'name' => ['required','string','max:255'],
+            //     'email' => ['required','string','email','max:255','unique:users'],
+            //     'password' => $this->passwordRules()
+            // ]);
 
             User::create([
                 'name' => $request->name,
@@ -72,7 +72,7 @@ class UserContoller extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            $user = User::where('email', $request->email)->firt();
+            $user = User::where('email', $request->email)->first();
 
             $tokenResult = $user->createToken('authToken')->plainTextToken;
 
